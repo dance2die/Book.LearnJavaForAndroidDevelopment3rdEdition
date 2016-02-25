@@ -1,5 +1,6 @@
 package collections;
 
+import java.util.EnumSet;
 import java.util.Set;
 import java.util.TreeSet;
 
@@ -15,6 +16,10 @@ public class CollectionsMain {
         daysOff.add(Weekday.THURSDAY);
         daysOff.add(Weekday.SATURDAY);
         System.out.println(daysOff);
+
+        for (Weekday weekday : EnumSet.allOf(Weekday.class)) {
+            System.out.println(weekday);
+        }
     }
 }
 
