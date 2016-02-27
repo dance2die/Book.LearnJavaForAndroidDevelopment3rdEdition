@@ -9,7 +9,25 @@ import java.util.*;
 public class CollectionsMain {
     public static void main(String[] args){
 //        testCollection();
-        testArrayDeque();
+//        testArrayDeque();
+        testColorMap();
+    }
+
+    private static void testColorMap() {
+        Map<String, Color> colorMap = new TreeMap<>();
+        colorMap.put("red", Color.RED);
+        colorMap.put("blue", Color.BLUE);
+        colorMap.put("green", Color.GREEN);
+        colorMap.put("RED", Color.RED);
+
+        for (String colorKey: colorMap.keySet()) {
+            System.out.println(colorKey);
+        }
+
+        Collection<Color> colorValues = colorMap.values();
+        for (Color colorValue : colorValues) {
+            System.out.println(colorValue);
+        }
     }
 
     private static void testArrayDeque() {
