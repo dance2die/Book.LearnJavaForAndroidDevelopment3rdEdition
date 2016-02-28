@@ -10,7 +10,22 @@ public class CollectionsMain {
     public static void main(String[] args){
 //        testCollection();
 //        testArrayDeque();
-        testColorMap();
+//        testColorMap();
+        testWeakHashMap();
+    }
+
+    private static void testWeakHashMap() {
+        Map<LargeObject, String> map = new WeakHashMap<>();
+        LargeObject largeObject = new LargeObject();
+        map.put(largeObject, "Large Object");
+        System.out.println(map);
+        largeObject = null;
+        while (!map.isEmpty())
+        {
+            System.out.println("looping until map is empty");
+            new LargeObject();
+        }
+        System.out.println(map);
     }
 
     private static void testColorMap() {
