@@ -8,7 +8,19 @@ public class IOMain {
     public static void main(String[] args){
 //        testListingDrives();
 //        testPathNameInfo();
-        testListingDirectories();
+//        testListingDirectories();
+        testTempFile();
+    }
+
+    private static void testTempFile() {
+        try {
+            System.out.println(System.getProperty("java.io.tmpdir"));
+            File temp = File.createTempFile("text", ".txt");
+            System.out.println(temp);
+            temp.deleteOnExit();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     private static void testListingDirectories() {
