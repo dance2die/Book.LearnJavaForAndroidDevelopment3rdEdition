@@ -1,15 +1,30 @@
 package io;
 
-import java.io.File;
-import java.io.FilenameFilter;
-import java.io.IOException;
+import java.io.*;
 
 public class IOMain {
     public static void main(String[] args){
 //        testListingDrives();
 //        testPathNameInfo();
 //        testListingDirectories();
-        testTempFile();
+//        testTempFile();
+        testSharedStreams();
+    }
+
+    private static void testSharedStreams() {
+        try {
+            System.setIn(new FileInputStream("C:\\temp\\bmac.txt"));
+            System.setOut(new PrintStream("out.txt"));
+            System.setErr(new PrintStream("err.txt"));
+
+            int ch;
+            while ((ch = System.in.read()) != -1)
+                System.out.print((char) ch);
+
+            System.err.println("Redirected error output");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     private static void testTempFile() {
