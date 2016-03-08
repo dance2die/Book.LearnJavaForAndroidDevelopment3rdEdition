@@ -2,6 +2,8 @@ package networks;
 
 import java.io.*;
 import java.net.*;
+import java.util.Collections;
+import java.util.Enumeration;
 
 /**
  * Created by dance2die on 3/5/2016.
@@ -10,7 +12,32 @@ public class NetworkMain {
     public static void main(final String[] args){
 
 //        testEcho();
-        testListResource();
+//        testListResource();
+        testNetworkInterfaces();
+    }
+
+    private static void testNetworkInterfaces() {
+        Enumeration<NetworkInterface> eni;
+        try {
+            eni = NetworkInterface.getNetworkInterfaces();
+            for (NetworkInterface ni: Collections.list(eni))
+            {
+                System.out.println("Name = " + ni.getName());
+                System.out.println("Display Name = " + ni.getDisplayName());
+                System.out.println("Loopback = " + ni.isLoopback());
+                System.out.println("Up and running = " + ni.isUp());
+                System.out.println("MTU = " + ni.getMTU());
+                System.out.println("Supports multicast = " + ni.supportsMulticast());
+                System.out.println("Sub-interfaces");
+                Enumeration<NetworkInterface> eni2;
+                eni2 = ni.getSubInterfaces();
+                for (NetworkInterface ni2: Collections.list(eni2))
+                    System.out.println("   " + ni2);
+                System.out.println();
+            }
+        } catch (SocketException e) {
+            e.printStackTrace();
+        }
     }
 
     private static void testListResource() {
