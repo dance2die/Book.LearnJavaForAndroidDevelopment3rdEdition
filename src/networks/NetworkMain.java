@@ -1,16 +1,42 @@
 package networks;
 
 import java.io.*;
-import java.net.ServerSocket;
-import java.net.Socket;
-import java.net.UnknownHostException;
+import java.net.*;
 
 /**
  * Created by dance2die on 3/5/2016.
  */
 public class NetworkMain {
     public static void main(final String[] args){
-        testEcho();
+
+//        testEcho();
+        testListResource();
+    }
+
+    private static void testListResource() {
+        try
+        {
+            URL url = new URL("http://www.google.com");
+            InputStream is = url.openStream();
+            try
+            {
+                int ch;
+                while ((ch = is.read()) != -1)
+                    System.out.print((char) ch);
+            }
+            catch (IOException ioe)
+            {
+                is.close();
+            }
+        }
+        catch (MalformedURLException murle)
+        {
+            System.err.println("invalid URL");
+        }
+        catch (IOException ioe)
+        {
+            System.err.println("I/O error: " + ioe.getMessage());
+        }
     }
 
     private static void testEcho() {
