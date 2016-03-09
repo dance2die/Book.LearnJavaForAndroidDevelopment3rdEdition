@@ -4,6 +4,8 @@ import java.io.*;
 import java.net.*;
 import java.util.Collections;
 import java.util.Enumeration;
+import java.util.Iterator;
+import java.util.List;
 
 /**
  * Created by dance2die on 3/5/2016.
@@ -13,7 +15,28 @@ public class NetworkMain {
 
 //        testEcho();
 //        testListResource();
-        testNetworkInterfaces();
+//        testNetworkInterfaces();
+        testNetworkInterfaces2();
+    }
+
+    private static void testNetworkInterfaces2() {
+        Enumeration<NetworkInterface> eni;
+        try {
+            eni = NetworkInterface.getNetworkInterfaces();
+
+            for (NetworkInterface ni: Collections.list(eni))
+            {
+                System.out.println("Name = " + ni.getName());
+                List<InterfaceAddress> ias = ni.getInterfaceAddresses();
+                Iterator<InterfaceAddress> iter = ias.iterator();
+                while (iter.hasNext())
+                    System.out.println(iter.next());
+                System.out.println();
+            }
+
+        } catch (SocketException e) {
+            e.printStackTrace();
+        }
     }
 
     private static void testNetworkInterfaces() {
