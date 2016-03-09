@@ -16,7 +16,30 @@ public class NetworkMain {
 //        testEcho();
 //        testListResource();
 //        testNetworkInterfaces();
-        testNetworkInterfaces2();
+//        testNetworkInterfaces2();
+        testCookies();
+    }
+
+    private static void testCookies() {
+        CookieManager cm = new CookieManager();
+        cm.setCookiePolicy(CookiePolicy.ACCEPT_ALL);
+        CookieHandler.setDefault(cm);
+        String url = "http://www.google.com";
+        url = "http://www.microsoft.com";
+        try {
+            new URL(url).openConnection().getContent();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        List<HttpCookie> cookies = cm.getCookieStore().getCookies();
+        for (HttpCookie cookie: cookies)
+        {
+            System.out.println("Name = " + cookie.getName());
+            System.out.println("Value = " + cookie.getValue());
+            System.out.println("Lifetime (seconds) = " + cookie.getMaxAge());
+            System.out.println("Path = " + cookie.getPath());
+            System.out.println();
+        }
     }
 
     private static void testNetworkInterfaces2() {
